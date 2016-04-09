@@ -83,11 +83,24 @@ def test_get_card_as_json()
 	puts my_card.as_json
 end
 
-
-my_card = Trello.client.find(:card, "pI9mUCHo")
-my_actions = my_card.actions
-
-p my_actions.class
-p my_actions.methods
+#コメントを取得してみる
+#カードの中の、アクションの中の、さらにアトリビュートの中に"あるかもしれない"
+#ぜんぶがぜんぶ、コメントのテキストを持っているわけではないので、ちゃんとチェックしないとダメ
+def test_get_comments()
+	my_card = Trello.client.find(:card, "pI9mUCHo")
+	my_actions = my_card.actions	#カードからアクションを取得
+	
+	#アクションを全部チェックする
+	my_actions.each do |action|
+		#アクションのアトリビュートを見る
+		my_attributes = action.attributes
+		
+		#アトリビュートの中に、テキスト（コメント）が存在した場合だけ抜き出す
+		if my_attributes[:data].key?("text") then
+			comment = my_attributes[:data]["text"]
+			p comment
+		end
+	end
+end
 
 exit	#終了してみる
