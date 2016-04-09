@@ -76,8 +76,18 @@ def test_20160409_1512
 	p my_list[0].methods
 end
 
+#jsonでカードの情報を取得してみる
+def test_get_card_as_json()
+	my_card = Trello.client.find(:card, "pI9mUCHo")
+
+	puts my_card.as_json
+end
+
 
 my_card = Trello.client.find(:card, "pI9mUCHo")
-p my_card.methods
+my_actions = my_card.actions
+
+p my_actions.class
+p my_actions.methods
 
 exit	#終了してみる
