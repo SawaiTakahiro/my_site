@@ -938,5 +938,12 @@
 - :__send__
 - :__id__
 
+### action > attributes
+- :id
+- :type
+- :data
+- :date
+- :member_creator_id
+- :member_participant
 
 

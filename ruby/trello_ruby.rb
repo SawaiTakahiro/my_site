@@ -39,11 +39,12 @@ def get_list_id_object(objects)
 end
 
 #渡されたカードIDに含まれる、コメントを抜き出す
+#日付をキーにしたハッシュで返すことに
 def get_comments(id_card)
 	my_card = Trello.client.find(:card, id_card)
 	my_actions = my_card.actions	#カードからアクションを取得
 	
-	output = Array.new
+	output = Hash.new
 	my_actions.map do |action|
 		#アクションのアトリビュートを見る
 		my_attributes = action.attributes
@@ -51,11 +52,29 @@ def get_comments(id_card)
 		#アトリビュートの中に、テキスト（コメント）が存在した場合だけ抜き出す
 		if my_attributes[:data].key?("text") then
 			comment = my_attributes[:data]["text"]
-			output << comment
+			date = my_attributes[:date]
+			
+			output.store(date, comment)
 		end
 	end
 	
 	return output
+end
+
+#概要をハッシュに変換する
+#形式に則ってないデータどうしよう
+def description_to_hash(text)
+	my_description = text.split("\n")
+	
+	config = Hash.new
+	
+	my_description.map do |text|
+		#読み込んだデータは、コロンで区切って使う
+		data = text.split(":")
+		config.store(data[0], data[1])
+	end
+	
+	return config
 end
 
 ##########################################################################################
