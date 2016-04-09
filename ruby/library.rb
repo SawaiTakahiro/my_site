@@ -34,9 +34,9 @@ def read_json(path)
 	return data
 end
 
-#JSONを読んで、ハッシュで返すやつ
+#ハッシュをJSONで保存するやつ
 def save_json(hash, save_path)
-	File.open(save_path, "w") do |file|
-		file << hash
+	open(save_path, "w") do |io|
+		JSON.dump(hash, io)
 	end
 end
