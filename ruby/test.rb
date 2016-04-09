@@ -66,14 +66,18 @@ def test_add_card()
 	Card.create(:name => "ががががが", :list_id => "5698751af2bdefd2e3b89abb")
 end
 
+#とりあえず保存的な
+def test_20160409_1512
+	id_board = ENV["my_board"]
+	my_board = Trello.client.find(:board, id_board)
+	my_list = my_board.lists
+
+	#puts get_list_id_object(my_board.lists)
+	p my_list[0].methods
+end
+
+
+my_card = Trello.client.find(:card, "pI9mUCHo")
+p my_card.methods
 
 exit	#終了してみる
-
-id_board = ENV["my_board"]
-my_board = Trello.client.find(:board, id_board)
-my_list = my_board.lists
-
-#puts get_list_id_object(my_board.lists)
-p my_list[0].methods
-
-
