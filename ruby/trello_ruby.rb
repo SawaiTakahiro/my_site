@@ -27,4 +27,45 @@ Trello.configure do |config|
 end
 
 ##########################################################################################
+#Trelloのオブジェクトを渡されると、IDだけ返す
+def get_list_id_object(objects)
+	output = Array.new
+	
+	objects.each do |object|
+		output << object.id
+	end
+	
+	return output
+end
+
+##########################################################################################
+#以下、あんまりいけてないかもしれない処理
+#そのボードに含まれるlistのIDを配列で返す
+#ID以外の情報は取ってこないよ
+def get_list_id_lists(id_board)
+	my_board = Trello.client.find(:board, id_board)
+	list_lists = my_board.lists
+	
+	output = Array.new
+	list_lists.each do |list|
+		output << list.id
+	end
+	
+	return output
+end
+
+#そのボードに含まれるカードのIDを配列で返す
+#ID以外の情報は取ってこないよ
+def get_list_id_cards(id_board)
+	my_board = Trello.client.find(:board, id_board)
+	list_cards = my_board.cards
+	
+	output = Array.new
+	list_cards.each do |card|
+		output << card.id
+	end
+	
+	return output
+end
+
 

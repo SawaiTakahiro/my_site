@@ -58,3 +58,12 @@ def test_get_list_cardid()
 	
 	puts output
 end
+
+id_board = ENV["my_board"]
+my_board = Trello.client.find(:board, id_board)
+my_list = my_board.lists
+
+#puts get_list_id_object(my_board.lists)
+p my_list[0].methods
+
+
