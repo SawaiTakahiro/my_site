@@ -103,4 +103,8 @@ def test_get_comments()
 	end
 end
 
+
+
+p get_comments("xlTPQ5hV")
+
 exit	#終了してみる

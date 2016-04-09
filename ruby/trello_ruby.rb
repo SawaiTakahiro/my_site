@@ -38,6 +38,26 @@ def get_list_id_object(objects)
 	return output
 end
 
+#渡されたカードIDに含まれる、コメントを抜き出す
+def get_comments(id_card)
+	my_card = Trello.client.find(:card, id_card)
+	my_actions = my_card.actions	#カードからアクションを取得
+	
+	output = Array.new
+	my_actions.map do |action|
+		#アクションのアトリビュートを見る
+		my_attributes = action.attributes
+		
+		#アトリビュートの中に、テキスト（コメント）が存在した場合だけ抜き出す
+		if my_attributes[:data].key?("text") then
+			comment = my_attributes[:data]["text"]
+			output << comment
+		end
+	end
+	
+	return output
+end
+
 ##########################################################################################
 #以下、あんまりいけてないかもしれない処理
 #そのボードに含まれるlistのIDを配列で返す
