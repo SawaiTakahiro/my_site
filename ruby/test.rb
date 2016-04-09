@@ -59,6 +59,16 @@ def test_get_list_cardid()
 	puts output
 end
 
+#カード足してみるだけ
+def test_add_card()
+	#参考
+	#http://qiita.com/AKB428/items/a4a9ff2893affb20f99c
+	Card.create(:name => "ががががが", :list_id => "5698751af2bdefd2e3b89abb")
+end
+
+
+exit	#終了してみる
+
 id_board = ENV["my_board"]
 my_board = Trello.client.find(:board, id_board)
 my_list = my_board.lists
